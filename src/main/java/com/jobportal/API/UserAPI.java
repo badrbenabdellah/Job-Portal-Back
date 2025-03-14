@@ -2,6 +2,7 @@ package com.jobportal.API;
 
 import com.jobportal.DTO.AccountType;
 import com.jobportal.DTO.UserDTO;
+import com.jobportal.Exception.JobPortalException;
 import com.jobportal.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class UserAPI {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO>registerUser(@RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<UserDTO>registerUser(@RequestBody @Valid UserDTO userDTO) throws JobPortalException {
         userDTO = userService.registerUser(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
