@@ -7,6 +7,7 @@ import com.jobportal.Entity.User;
 import com.jobportal.Exception.JobPortalException;
 import com.jobportal.Repository.OTPRepository;
 import com.jobportal.Repository.UserRepository;
+import com.jobportal.Utility.Data;
 import com.jobportal.Utility.Utilities;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean sendOtp(String email) throws JobPortalException, MessagingException {
+    public Boolean sendOtp(String email) throws Exception {
         User user = userRepository.findByEmail(email).orElseThrow(()->new JobPortalException("USER_NOT_FOUND"));
         MimeMessage mm = mailSender.createMimeMessage();
         MimeMessageHelper message = new MimeMessageHelper(mm, true);
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
         String genOtp = Utilities.generateOTP();
         OTP otp = new OTP(email, genOtp, LocalDateTime.now());
         otpRepository.save(otp);
-        message.setText("Your Code is : "+genOtp, true);
+        message.setText(Data.getMessageBody(genOtp, user.getName()), true);
         mailSender.send(mm);
         return true;
     }

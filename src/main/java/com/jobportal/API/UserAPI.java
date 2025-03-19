@@ -33,7 +33,7 @@ public class UserAPI {
         return new ResponseEntity<>(userService.loginUser(loginDTO), HttpStatus.OK);
     }
 
-    @PostMapping("/sendOtp{email}")
+    @PostMapping("/sendOtp/{email}")
     public ResponseEntity<ResponseDTO>sendOtp(@PathVariable String email) throws Exception {
         userService.sendOtp(email);
         return new ResponseEntity<>(new ResponseDTO("OTP sent Successfully."), HttpStatus.OK);
