@@ -27,14 +27,10 @@ public class Data {
                 "            <p>Hello " +name+ ",</p>\n" +
                 "            <p>We have received a request to verify your email address. Your OTP code is : </p>\n" +
                 "            <div class=\"otp-code\">" + otp + "</div>\n" +
-                "            <p>Please use this code to complete your verification process. This OTP is valid for " + validityDuration + " minutes.</p>\n" +
                 "            <p>If you did not request this OTP, please ignore this email or contact support.</p>\n" +
                 "        </div>\n" +
                 "        <div class=\"footer\">\n" +
                 "            <p>Thank you,</p>\n" +
-                "            <p>" + companyName + "</p>\n" +
-                "            <p>" + companyAddress + "</p>\n" +
-                "            <p>" + contactInfo + "</p>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "</body>\n" +

@@ -66,4 +66,11 @@ public class UserServiceImpl implements UserService {
         mailSender.send(mm);
         return true;
     }
+
+    @Override
+    public Boolean verifyOtp(String email, String otp) throws JobPortalException {
+        OTP otpEntity = otpRepository.findById(email).orElseThrow(()->new JobPortalException("OTP_NOT_FOUND"));
+        if(!otpEntity.getOtpCode().equals(otp)) throw new JobPortalException("OTP_INCORRECT");
+        return true;
+    }
 }
