@@ -7,30 +7,52 @@ public class Data {
                 "<head>\n" +
                 "    <meta charset=\"UTF-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    <title>OTP Email</title>\n" +
+                "    <title>Your OTP Code</title>\n" +
                 "    <style>\n" +
-                "        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n" +
-                "        .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }\n" +
-                "        .header { text-align: center; padding: 10px 0; }\n" +
-                "        .header h1 { margin: 0; color: #333333; }\n" +
-                "        .content { padding: 20px; text-align: center; }\n" +
-                "        .otp-code { font-size: 24px; font-weight: bold; color: #007BFF; margin: 20px 0; }\n" +
-                "        .footer { text-align: center; padding: 10px 0; font-size: 12px; color: #777777; }\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            background-color: #f4f4f4;\n" +
+                "            padding: 20px;\n" +
+                "            text-align: center;\n" +
+                "        }\n" +
+                "        .container {\n" +
+                "            background-color: #ffffff;\n" +
+                "            padding: 20px;\n" +
+                "            border-radius: 10px;\n" +
+                "            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);\n" +
+                "            max-width: 500px;\n" +
+                "            margin: auto;\n" +
+                "        }\n" +
+                "        .header h1 {\n" +
+                "            color: #333;\n" +
+                "        }\n" +
+                "        .otp {\n" +
+                "            font-size: 24px;\n" +
+                "            font-weight: bold;\n" +
+                "            color: #ff5733;\n" +
+                "            margin: 20px 0;\n" +
+                "        }\n" +
+                "        .footer {\n" +
+                "            font-size: 12px;\n" +
+                "            color: #777;\n" +
+                "            margin-top: 20px;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "    <div class=\"email-container\">\n" +
+                "    <div class=\"container\">\n" +
                 "        <div class=\"header\">\n" +
-                "            <h1>Your One-Time Password (OTP)</h1>\n" +
+                "            <h1>Your OTP Code</h1>\n" +
                 "        </div>\n" +
-                "        <div class=\"content\">\n" +
-                "            <p>Hello " +name+ ",</p>\n" +
-                "            <p>We have received a request to verify your email address. Your OTP code is : </p>\n" +
-                "            <div class=\"otp-code\">" + otp + "</div>\n" +
-                "            <p>If you did not request this OTP, please ignore this email or contact support.</p>\n" +
+                "        <div class=\"body\">\n" +
+                "            <p>Hello" + name + ",</p>\n" +
+                "            <p>We have received a request to verify your email address. Your OTP code is:</p>\n" +
+                "            <div class=\"otp\">" + otp + "</div>\n" +
+                "            <p>This OTP code is valid for 10 minutes. If you did not request this, please ignore this email.</p>\n" +
+                "            <p>Thank you for using our service!</p>\n" +
                 "        </div>\n" +
                 "        <div class=\"footer\">\n" +
-                "            <p>Thank you,</p>\n" +
+                "            <p>&copy; 2025 FJobs. All rights reserved.</p>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "</body>\n" +

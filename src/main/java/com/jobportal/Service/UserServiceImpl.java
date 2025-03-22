@@ -1,6 +1,7 @@
 package com.jobportal.Service;
 
 import com.jobportal.DTO.LoginDTO;
+import com.jobportal.DTO.ResponseDTO;
 import com.jobportal.DTO.UserDTO;
 import com.jobportal.Entity.OTP;
 import com.jobportal.Entity.User;
@@ -57,6 +58,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email).orElseThrow(()->new JobPortalException("USER_NOT_FOUND"));
         MimeMessage mm = mailSender.createMimeMessage();
         MimeMessageHelper message = new MimeMessageHelper(mm, true);
+        message.setFrom("benabdellahbadr1@gmail.com");
         message.setTo(email);
         message.setSubject("YOUR OTP Code");
         String genOtp = Utilities.generateOTP();
@@ -72,5 +74,13 @@ public class UserServiceImpl implements UserService {
         OTP otpEntity = otpRepository.findById(email).orElseThrow(()->new JobPortalException("OTP_NOT_FOUND"));
         if(!otpEntity.getOtpCode().equals(otp)) throw new JobPortalException("OTP_INCORRECT");
         return true;
+    }
+
+    @Override
+    public ResponseDTO changePassword(LoginDTO loginDTO) throws JobPortalException {
+        User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()->new JobPortalException("USER_NOT_FOUND"));
+        user.setPassword(passwordEncoder.encode(loginDTO.getPassword()));
+        userRepository.save(user);
+        return new ResponseDTO("Password changed successfully.");
     }
 }
