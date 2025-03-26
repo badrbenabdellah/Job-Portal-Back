@@ -7,6 +7,7 @@ import com.jobportal.Entity.OTP;
 import com.jobportal.Entity.User;
 import com.jobportal.Exception.JobPortalException;
 import com.jobportal.Repository.OTPRepository;
+import com.jobportal.Repository.ProfileRepository;
 import com.jobportal.Repository.UserRepository;
 import com.jobportal.Utility.Data;
 import com.jobportal.Utility.Utilities;
@@ -33,6 +34,9 @@ public class UserServiceImpl implements UserService {
     private OTPRepository otpRepository;
 
     @Autowired
+    private ProfileService profileService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -42,6 +46,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO registerUser(UserDTO userDTO) throws JobPortalException {
         Optional<User> optional = userRepository.findByEmail(userDTO.getEmail());
         if(optional.isPresent()) throw new JobPortalException("USER_FOUND");
+        userDTO.setProfileId(profileService.createProfile(userDTO.getEmail()));
         userDTO.setId(Utilities.getNextSequence("users"));
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User user = userDTO.toEntity();
