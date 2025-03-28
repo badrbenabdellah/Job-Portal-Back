@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Certification {
-    private String title;
+    private String name;
     private String issuer;
-    private LocalDateTime issueDate;
+    private String  issueDate;
     private String certificateId;
 }
