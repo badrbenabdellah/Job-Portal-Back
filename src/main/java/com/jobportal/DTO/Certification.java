@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 public class Certification {
     private String name;
     private String issuer;
-    private String  issueDate;
+    private LocalDateTime issueDate;
     private String certificateId;
 }
