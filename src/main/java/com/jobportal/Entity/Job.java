@@ -1,6 +1,5 @@
 package com.jobportal.Entity;
 
-import com.jobportal.Entity.Applicant;
 import com.jobportal.DTO.JobDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,10 +28,12 @@ public class Job {
     private LocalDateTime postTime;
     private String description;
     private List<String> skillsRequired;
-    private jobStatus jobStatus;
+    private com.jobportal.DTO.jobStatus jobStatus;
+    private Long postedBy;
 
     public JobDTO toDTO() {
         return new JobDTO(this.id, this.jobTitle, this.company, this.applicants!=null?this.applicants.stream().map((x)->x.toDTO()).toList():null, this.about, this.experience,
-                this.jobType, this.location, this.packageOffered, this.postTime, this.description, this.skillsRequired, this.jobStatus);
+                this.jobType, this.location, this.packageOffered, this.postTime, this.description, this.skillsRequired,
+                this.jobStatus ,this.postedBy);
     }
 }
