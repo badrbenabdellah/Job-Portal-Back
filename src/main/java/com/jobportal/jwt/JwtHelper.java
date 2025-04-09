@@ -15,10 +15,8 @@ import java.util.function.Function;
 public class JwtHelper {
     private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    // Token expiration time in milliseconds (e.g., 1 hour = 3600000 ms)
     private static final long JWT_TOKEN_VALIDITY = 3600000;
 
-    // Retrieve username (or subject) from the JWT token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
@@ -26,13 +24,11 @@ public class JwtHelper {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    // Retrieve any claim from the JWT token
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
 
-    // Get all claims from the token using the secret key
     private Claims getAllClaimsFromToken(String token) {
         //return Jwts.parser()
         return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
@@ -44,10 +40,15 @@ public class JwtHelper {
     }
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        CustomUserDetails customUser = (CustomUserDetails) userDetails;
+        claims.put("id", customUser.getId());
+        claims.put("name", customUser.getName());
+        claims.put("accountType", customUser.getAccountType());
+        claims.put("profileId", customUser.getProfileId());
+        //claims.put("accountType", customUser.getAccountType());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
-    // Create the token by signing it with the secret key
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
